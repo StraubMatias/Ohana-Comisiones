@@ -65,7 +65,6 @@ Capturas del sistema en uso (datos de demostración). Cada imagen corresponde a 
 |----------|--------|
 | Inicio de sesión | ![Pantalla de login](./screenshots/01-login.png) |
 | Dashboard | ![Dashboard](./screenshots/02-dashboard.png) |
-| Clientes | ![Listado de clientes](./screenshots/03-clientes.png) |
 | Hoja de ruta | ![Hoja de ruta del día](./screenshots/04-hoja-de-ruta.png) |
 | Remitos | ![Listado de remitos](./screenshots/05-remitos.png) |
 | Gastos | ![Gastos del mes](./screenshots/06-gastos.png) |
@@ -125,7 +124,7 @@ Cada tarjeta enlaza al módulo correspondiente. Las fechas respetan la zona hora
 | Importación | Archivo `.xlsx`, `.xls` o `.csv`: detección de columnas (nombre, CUIT, dirección, etc.), vista previa y carga en lote con resumen (importados, filas sin nombre, errores). |
 | Baja | Eliminación con confirmación; repartos quedan desvinculados sin bloquear por remitos antiguos (modelo actual: el cliente se asocia vía reparto, no en el remito). |
 
-![Clientes — búsqueda y deuda](./screenshots/03-clientes.png)
+*No se incluye captura del listado de clientes en esta documentación: la pantalla muestra datos personales (CUIT, contacto, deuda) que no deben publicarse.*
 
 ---
 

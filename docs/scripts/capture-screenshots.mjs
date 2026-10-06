@@ -25,7 +25,6 @@ const PASS = process.env.SCREENSHOT_PASS ?? "capturas-docs";
 const ROUTES = [
   { path: "/login", file: "01-login.png", public: true },
   { path: "/", file: "02-dashboard.png" },
-  { path: "/clientes", file: "03-clientes.png" },
   { path: "/repartos", file: "04-hoja-de-ruta.png" },
   { path: "/remitos", file: "05-remitos.png" },
   { path: "/gastos", file: "06-gastos.png" },
