@@ -2,20 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  esRutaActiva,
+  type NavItem,
+} from "@/app/components/layout/nav-items";
 
-interface ItemLink {
-  href: string;
-  label: string;
-}
-
-export function NavLinks({ links }: { links: ItemLink[] }) {
+export function NavLinks({ links }: { links: NavItem[] }) {
   const pathname = usePathname();
 
   return (
     <>
       {links.map(({ href, label }) => {
-        const activo =
-          href === "/" ? pathname === "/" : pathname.startsWith(href);
+        const activo = esRutaActiva(pathname, href);
 
         return (
           <Link

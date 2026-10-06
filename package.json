@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:local": "env -u TURSO_DATABASE_URLL -u TURSO_AUTH_TOKENN next dev",
     "build": "next build",
     "start": "next start",
     "clean": "rm -rf .next",
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "db:migrate": "node --env-file-if-exists=.env.local scripts/migrate.mjs"
+    "db:migrate": "node --env-file-if-exists=.env.local scripts/migrate.mjs",
+    "db:seed-demo": "env -u TURSO_DATABASE_URLL -u TURSO_AUTH_TOKENN node docs/scripts/seed-demo-docs.mjs"
   },
   "dependencies": {
     "@libsql/client": "^0.18.0",

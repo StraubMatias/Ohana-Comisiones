@@ -10,15 +10,7 @@ import {
   eliminarVehiculo as eliminarVehiculoDb,
 } from "@/lib/data/vehiculos";
 import type { DatosNuevoVehiculo } from "@/lib/data/vehiculos";
-
-function texto(formData: FormData, campo: string): string {
-  return String(formData.get(campo) ?? "").trim();
-}
-
-function textoOpcional(formData: FormData, campo: string): string | undefined {
-  const valor = texto(formData, campo);
-  return valor.length > 0 ? valor : undefined;
-}
+import { texto, textoOpcional } from "@/lib/formulario";
 
 /** Lee un entero >= 0 opcional; devuelve undefined si está vacío o inválido. */
 function enteroOpcional(formData: FormData, campo: string): number | undefined {

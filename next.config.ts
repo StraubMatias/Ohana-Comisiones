@@ -27,6 +27,7 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  agentRules: false,
   cacheComponents: true,
   experimental: {
     serverActions: {

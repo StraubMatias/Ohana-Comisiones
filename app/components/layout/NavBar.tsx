@@ -1,18 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { NavLinks } from "@/app/components/layout/NavLinks";
+import { NAV_ITEMS } from "@/app/components/layout/nav-items";
 import { cerrarSesionAction } from "@/app/actions/auth";
 import type { UsuarioSesion } from "@/lib/types";
-
-const linkItems = [
-  { href: "/", label: "Dashboard" },
-  { href: "/clientes", label: "Clientes" },
-  { href: "/repartos", label: "Hoja de Ruta" },
-  { href: "/remitos", label: "Remitos" },
-  { href: "/vehiculos", label: "Vehículos" },
-  { href: "/facturacion", label: "Facturación" },
-  { href: "/gastos", label: "Gastos" },
-];
 
 /**
  * Navegación principal. Sidebar fija en desktop, barra horizontal en mobile.
@@ -36,7 +27,7 @@ export function NavBar({ usuario }: { usuario: UsuarioSesion }) {
       </div>
 
       <nav className="flex gap-1 overflow-x-auto px-3 pb-3 text-sm lg:flex-col lg:overflow-visible lg:px-3 lg:pb-6">
-        <NavLinks links={linkItems} />
+        <NavLinks links={NAV_ITEMS} />
 
         <div className="mt-4 border-t border-zinc-800 pt-4 lg:mt-6">
           <p className="px-3 text-xs font-medium uppercase tracking-wide text-zinc-500">

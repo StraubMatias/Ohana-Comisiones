@@ -10,6 +10,7 @@ import {
 } from "@/lib/data/gastos";
 import { pesosACentavos } from "@/lib/types";
 import type { CategoriaGasto } from "@/lib/types";
+import { texto, textoOpcional } from "@/lib/formulario";
 
 const CATEGORIAS_VALIDAS: CategoriaGasto[] = [
   "combustible",
@@ -17,15 +18,6 @@ const CATEGORIAS_VALIDAS: CategoriaGasto[] = [
   "insumos",
   "otros",
 ];
-
-function texto(formData: FormData, campo: string): string {
-  return String(formData.get(campo) ?? "").trim();
-}
-
-function textoOpcional(formData: FormData, campo: string): string | undefined {
-  const valor = texto(formData, campo);
-  return valor.length > 0 ? valor : undefined;
-}
 
 // ----------------------------------------------------------------------------
 // Registro de gasto

@@ -13,92 +13,29 @@ import {
   obtenerPartesReparto,
 } from "@/lib/data/repartos";
 import { crearRemito, proximoNumeroRemito } from "@/lib/data/remitos";
-import { FORMAS_PAGO, pesosACentavos } from "@/lib/types";
+import { FORMAS_PAGO } from "@/lib/types";
 import type { FormaPago } from "@/lib/types";
-import {
-  puedeEjecutarAccionSensible,
-  registrarAccionSensible,
-} from "@/lib/seguridad";
-
-function texto(formData: FormData, campo: string): string {
-  return String(formData.get(campo) ?? "").trim();
-}
-
-function textoOpcional(formData: FormData, campo: string): string | undefined {
-  const valor = texto(formData, campo);
-  return valor.length > 0 ? valor : undefined;
-}
+import { puedeEjecutarAccionSensible } from "@/lib/seguridad";
+import { lineasDesdeFormData, texto, textoOpcional } from "@/lib/formulario";
 
 function esFormaPago(valor: string): valor is FormaPago {
   return (FORMAS_PAGO as readonly string[]).includes(valor);
 }
 
-/** Reconstruye los items del remito a partir de los campos repetidos del formulario. */
-function itemsDelFormulario(formData: FormData): Array<{
-  descripcion: string;
-  cantidad: number;
-  precioUnitarioCentavos: number;
-}> {
-  const descripciones = formData
-    .getAll("item_descripcion")
-    .map((valor) => String(valor).trim());
-  const cantidades = formData
-    .getAll("item_cantidad")
-    .map((valor) => Number(String(valor).replace(",", ".")));
-  const precios = formData.getAll("item_precio").map((valor) =>
-    pesosACentavos(String(valor)),
-  );
-
-  return itemsDesdeCampos(descripciones, cantidades, precios);
+function itemsDelFormulario(formData: FormData) {
+  return lineasDesdeFormData(formData, {
+    descripcion: "item_descripcion",
+    cantidad: "item_cantidad",
+    precio: "item_precio",
+  });
 }
 
-/** Reconstruye la mercadería directa del reparto (campos `reparto_item_*`). */
-function itemsRepartoDelFormulario(formData: FormData): Array<{
-  descripcion: string;
-  cantidad: number;
-  precioUnitarioCentavos: number;
-}> {
-  const descripciones = formData
-    .getAll("reparto_item_descripcion")
-    .map((valor) => String(valor).trim());
-  const cantidades = formData
-    .getAll("reparto_item_cantidad")
-    .map((valor) => Number(String(valor).replace(",", ".")));
-  const precios = formData.getAll("reparto_item_precio").map((valor) =>
-    pesosACentavos(String(valor)),
-  );
-
-  return itemsDesdeCampos(descripciones, cantidades, precios);
-}
-
-/** Arma los items descartando las líneas sin descripción o con cantidad inválida. */
-function itemsDesdeCampos(
-  descripciones: string[],
-  cantidades: number[],
-  precios: number[],
-): Array<{
-  descripcion: string;
-  cantidad: number;
-  precioUnitarioCentavos: number;
-}> {
-  const items: Array<{
-    descripcion: string;
-    cantidad: number;
-    precioUnitarioCentavos: number;
-  }> = [];
-
-  for (let i = 0; i < descripciones.length; i += 1) {
-    const descripcion = descripciones[i];
-    const cantidad = cantidades[i] ?? 0;
-    if (!descripcion || !Number.isFinite(cantidad) || cantidad <= 0) continue;
-    items.push({
-      descripcion,
-      cantidad,
-      precioUnitarioCentavos: Math.max(0, precios[i] ?? 0),
-    });
-  }
-
-  return items;
+function itemsRepartoDelFormulario(formData: FormData) {
+  return lineasDesdeFormData(formData, {
+    descripcion: "reparto_item_descripcion",
+    cantidad: "reparto_item_cantidad",
+    precio: "reparto_item_precio",
+  });
 }
 
 // ----------------------------------------------------------------------------

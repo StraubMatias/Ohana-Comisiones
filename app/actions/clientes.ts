@@ -19,15 +19,7 @@ import {
   puedeEjecutarAccionSensible,
   registrarAccionSensible,
 } from "@/lib/seguridad";
-
-function texto(formData: FormData, campo: string): string {
-  return String(formData.get(campo) ?? "").trim();
-}
-
-function textoOpcional(formData: FormData, campo: string): string | undefined {
-  const valor = texto(formData, campo);
-  return valor.length > 0 ? valor : undefined;
-}
+import { texto, textoOpcional } from "@/lib/formulario";
 
 function normalizarCuit(cuit: string): string {
   return cuit.replace(/[^0-9-]/g, "").slice(0, 13);
@@ -148,7 +140,7 @@ export async function eliminarClienteAction(
   try {
     await eliminarClienteDb(id);
     await registrarAccionSensible("usuario", usuario.nombre);
-  } catch (error) {
+  } catch {
     // No exponer detalles del error al usuario
     console.error("[clientes] error al eliminar");
     return {

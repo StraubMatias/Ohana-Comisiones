@@ -16,10 +16,7 @@ import {
   puedeIntentarLogin,
   registrarIntentoFallido,
 } from "@/lib/seguridad";
-
-function texto(formData: FormData, campo: string): string {
-  return String(formData.get(campo) ?? "").trim();
-}
+import { texto } from "@/lib/formulario";
 
 /**
  * IP del cliente que inicia sesión (para el control de fuerza bruta).

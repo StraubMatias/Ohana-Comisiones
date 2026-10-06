@@ -9,51 +9,14 @@ import {
   eliminarRemito,
   proximoNumeroRemito,
 } from "@/lib/data/remitos";
-import { pesosACentavos } from "@/lib/types";
+import { lineasDesdeFormData, texto, textoOpcional } from "@/lib/formulario";
 
-function texto(formData: FormData, campo: string): string {
-  return String(formData.get(campo) ?? "").trim();
-}
-
-function textoOpcional(formData: FormData, campo: string): string | undefined {
-  const valor = texto(formData, campo);
-  return valor.length > 0 ? valor : undefined;
-}
-
-/** Reconstruye los items a partir de los campos repetidos del formulario. */
-function itemsDelFormulario(formData: FormData): Array<{
-  descripcion: string;
-  cantidad: number;
-  precioUnitarioCentavos: number;
-}> {
-  const descripciones = formData
-    .getAll("item_descripcion")
-    .map((valor) => String(valor).trim());
-  const cantidades = formData
-    .getAll("item_cantidad")
-    .map((valor) => Number(String(valor).replace(",", ".")));
-  const precios = formData.getAll("item_precio").map((valor) =>
-    pesosACentavos(String(valor)),
-  );
-
-  const items: Array<{
-    descripcion: string;
-    cantidad: number;
-    precioUnitarioCentavos: number;
-  }> = [];
-
-  for (let i = 0; i < descripciones.length; i += 1) {
-    const descripcion = descripciones[i];
-    const cantidad = cantidades[i] ?? 0;
-    if (!descripcion || !Number.isFinite(cantidad) || cantidad <= 0) continue;
-    items.push({
-      descripcion,
-      cantidad,
-      precioUnitarioCentavos: Math.max(0, precios[i] ?? 0),
-    });
-  }
-
-  return items;
+function itemsDelFormulario(formData: FormData) {
+  return lineasDesdeFormData(formData, {
+    descripcion: "item_descripcion",
+    cantidad: "item_cantidad",
+    precio: "item_precio",
+  });
 }
 
 // ----------------------------------------------------------------------------

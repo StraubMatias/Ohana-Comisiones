@@ -2,7 +2,7 @@
 
 **Versión del documento:** 1.0  
 **Producto:** Plataforma web de gestión operativa  
-**Repositorio:** [sistema-repartos-facturacion](https://github.com/Matute2004/sistema-repartos-facturacion)
+**Repositorio:** [Ohana-Comisiones](https://github.com/StraubMatias/Ohana-Comisiones)
 
 ---
 
@@ -57,10 +57,29 @@ Ofrecer una **única fuente de verdad operativa**: registrar, consultar y actuar
 
 ---
 
+## 3.1 Recorrido visual por pantallas
+
+Capturas del sistema en uso (datos de demostración). Cada imagen corresponde a un módulo descrito en la sección 5.
+
+| Pantalla | Vista |
+|----------|--------|
+| Inicio de sesión | ![Pantalla de login](./screenshots/01-login.png) |
+| Dashboard | ![Dashboard](./screenshots/02-dashboard.png) |
+| Clientes | ![Listado de clientes](./screenshots/03-clientes.png) |
+| Hoja de ruta | ![Hoja de ruta del día](./screenshots/04-hoja-de-ruta.png) |
+| Remitos | ![Listado de remitos](./screenshots/05-remitos.png) |
+| Gastos | ![Gastos del mes](./screenshots/06-gastos.png) |
+| Vehículos | ![Flota](./screenshots/07-vehiculos.png) |
+| Facturación (AFIP) | ![Enlaces AFIP](./screenshots/08-facturacion.png) |
+
+---
+
 ## 4. Usuarios y acceso
 
 - **Usuario administrador:** acceso completo a todos los módulos.
 - **Login:** nombre de usuario y contraseña; sesión persistente (cookie firmada, duración prolongada).
+
+![Pantalla de ingreso](./screenshots/01-login.png)
 - **Seguridad:**
   - Bloqueo temporal tras intentos fallidos de login (por usuario e IP).
   - Límite de frecuencia en acciones sensibles (alta masiva de clientes, importaciones).
@@ -86,6 +105,8 @@ Ofrecer una **única fuente de verdad operativa**: registrar, consultar y actuar
 
 Cada tarjeta enlaza al módulo correspondiente. Las fechas respetan la zona horaria de **Argentina (Buenos Aires)**.
 
+![Dashboard — métricas del día](./screenshots/02-dashboard.png)
+
 ---
 
 ### 5.2 Clientes
@@ -103,6 +124,8 @@ Cada tarjeta enlaza al módulo correspondiente. Las fechas respetan la zona hora
 | Ficha | Detalle del cliente, repartos vinculados, forma de pago, acceso a remitos asociados. |
 | Importación | Archivo `.xlsx`, `.xls` o `.csv`: detección de columnas (nombre, CUIT, dirección, etc.), vista previa y carga en lote con resumen (importados, filas sin nombre, errores). |
 | Baja | Eliminación con confirmación; repartos quedan desvinculados sin bloquear por remitos antiguos (modelo actual: el cliente se asocia vía reparto, no en el remito). |
+
+![Clientes — búsqueda y deuda](./screenshots/03-clientes.png)
 
 ---
 
@@ -124,6 +147,8 @@ Cada tarjeta enlaza al módulo correspondiente. Las fechas respetan la zona hora
 
 **Regla de negocio clave:** no existe un “estado entregado” separado; lo relevante es si el reparto **ya se cobró** (`cobrado` + forma de pago) o sigue pendiente.
 
+![Hoja de ruta — calendario, repartos y rinde del día](./screenshots/04-hoja-de-ruta.png)
+
 ---
 
 ### 5.4 Remitos
@@ -138,6 +163,8 @@ Cada tarjeta enlaza al módulo correspondiente. Las fechas respetan la zona hora
 - Listado general y detalle con datos para imprimir.
 - **Imprimir / guardar PDF** desde el navegador.
 - Alta desde flujo de reparto o módulo dedicado; eliminación con confirmación.
+
+![Remitos — numeración y listado](./screenshots/05-remitos.png)
 
 ---
 
@@ -154,6 +181,8 @@ Cada tarjeta enlaza al módulo correspondiente. Las fechas respetan la zona hora
 
 **Categorías:** combustible, mecánico, insumos, otros.
 
+![Gastos — registro y total del mes](./screenshots/06-gastos.png)
+
 ---
 
 ### 5.6 Vehículos
@@ -167,6 +196,8 @@ Cada tarjeta enlaza al módulo correspondiente. Las fechas respetan la zona hora
 - Notas libres.
 - Alta, edición, ficha y baja.
 
+![Vehículos — flota registrada](./screenshots/07-vehiculos.png)
+
 ---
 
 ### 5.7 Facturación (enlaces AFIP)
@@ -175,6 +206,8 @@ Cada tarjeta enlaza al módulo correspondiente. Las fechas respetan la zona hora
 
 **Contenido:** tarjetas con enlaces externos a Portal AFIP, Monotributo y comprobantes en línea.  
 **No incluye:** generación de CAE, integración con webservices AFIP ni archivo de comprobantes dentro del sistema.
+
+![Facturación — accesos rápidos a AFIP](./screenshots/08-facturacion.png)
 
 ---
 
@@ -256,6 +289,7 @@ Cada tarjeta enlaza al módulo correspondiente. Las fechas respetan la zona hora
 - Ejecutar `npm run db:migrate` tras actualizaciones que cambien el esquema.
 - Monitorear despliegues y el workflow de CI en GitHub.
 - Opcional: `npm run clean` en desarrollo si la carpeta `.next` crece mucho (caché local de Next.js).
+- `npm run db:seed-demo` solo escribe en **SQLite local**; no usar contra Turso de producción.
 
 **Posibles líneas de evolución** (no incluidas en el alcance actual):
 
@@ -287,4 +321,4 @@ Para **incidencias técnicas** (acceso, despliegue, migraciones), contactar al d
 
 ---
 
-*Documento generado para describir el estado funcional y técnico del sistema Ohana Comisiones según el código en el repositorio `sistema-repartos-facturacion`.*
+*Documento alineado al código del repositorio [Ohana-Comisiones](https://github.com/StraubMatias/Ohana-Comisiones). Capturas en `docs/screenshots/`.*
